@@ -2,8 +2,8 @@
   "name": "ngx-realtime-chart",
   "version": "0.1.0",
   "peerDependencies": {
-    "@angular/common": "^17.0.0",
-    "@angular/core": "^17.0.0",
+    "@angular/common": ">= 17.0.0",
+    "@angular/core": ">= 17.0.0",
     "d3": "^7.8.5",
     "date-fns": "^2.30.0"
   },
