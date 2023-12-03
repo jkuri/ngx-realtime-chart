@@ -1,20 +1,16 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, inject } from '@angular/core';
-import { ResizeService } from './shared/resize.service';
-import {
-  defaultRealtimeChartOptions,
-  RealtimeChartData,
-  RealtimeChartOptions
-} from './ngx-realtime-chart.interface';
-import { scaleLinear, ScaleLinear, scaleTime, ScaleTime } from 'd3-scale';
-import { select, Selection } from 'd3-selection';
-import { area, Area, line, Line } from 'd3-shape';
-import { min, max } from 'd3-array';
+import { max, min } from 'd3-array';
 import { Axis, axisBottom, axisLeft } from 'd3-axis';
+import { ScaleLinear, ScaleTime, scaleLinear, scaleTime } from 'd3-scale';
+import { Selection, select } from 'd3-selection';
+import { Area, Line, area, line } from 'd3-shape';
 import { subSeconds } from 'date-fns';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { hexToRgb } from './shared/color';
+import { RealtimeChartData, RealtimeChartOptions, defaultRealtimeChartOptions } from './ngx-realtime-chart.interface';
 import { curveTypeMapping } from './shared/chart.interface';
+import { hexToRgb } from './shared/color';
+import { ResizeService } from './shared/resize.service';
 
 @Component({
   selector: 'ngx-realtime-chart',
@@ -138,8 +134,9 @@ export class NgxRealtimeChartComponent implements OnInit, OnDestroy {
         this.context.beginPath();
         this.area.curve(curveTypeMapping[this.options.lines![i].curve!]);
         this.area(d as any);
-        this.context.fillStyle = `rgba(${hexToRgb(this.options.lines![i].areaColor!)}, ${this.options.lines![i].areaOpacity
-          })`;
+        this.context.fillStyle = `rgba(${hexToRgb(this.options.lines![i].areaColor!)}, ${
+          this.options.lines![i].areaOpacity
+        })`;
         this.context.fill();
         this.context.closePath();
       }

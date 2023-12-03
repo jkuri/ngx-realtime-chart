@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subject, Subscription, fromEvent, share } from 'rxjs';
 
 @Injectable({

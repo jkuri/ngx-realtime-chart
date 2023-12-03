@@ -1,5 +1,5 @@
 import {
-  curveLinear,
+  CurveFactory,
   curveBasis,
   curveBasisClosed,
   curveBasisOpen,
@@ -9,14 +9,14 @@ import {
   curveCatmullRom,
   curveCatmullRomClosed,
   curveCatmullRomOpen,
+  curveLinear,
   curveLinearClosed,
   curveMonotoneX,
   curveMonotoneY,
   curveNatural,
   curveStep,
   curveStepAfter,
-  curveStepBefore,
-  CurveFactory
+  curveStepBefore
 } from 'd3-shape';
 
 export type CurveType =
