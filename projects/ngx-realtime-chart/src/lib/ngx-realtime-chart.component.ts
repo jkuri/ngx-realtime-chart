@@ -6,7 +6,6 @@ import { Selection, select } from 'd3-selection';
 import { Area, Line, area, line } from 'd3-shape';
 import { subSeconds } from 'date-fns';
 import { Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 import { RealtimeChartData, RealtimeChartOptions, defaultRealtimeChartOptions } from './ngx-realtime-chart.interface';
 import { curveTypeMapping } from './shared/chart.interface';
 import { hexToRgb } from './shared/color';
@@ -62,7 +61,7 @@ export class NgxRealtimeChartComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initChart();
-    this.subs.add(this.resizeService.onResize$.pipe(debounceTime(500)).subscribe(() => this.redrawChart()));
+    this.subs.add(this.resizeService.onResize$.subscribe(() => this.redrawChart()));
   }
 
   ngOnDestroy(): void {
@@ -115,9 +114,7 @@ export class NgxRealtimeChartComponent implements OnInit, OnDestroy {
 
     this.data.forEach((d, i) => {
       this.data[i] = this.updateData(d);
-    });
 
-    this.data.forEach((d, i) => {
       this.context.beginPath();
       this.line.curve(curveTypeMapping[this.options.lines![i].curve!]);
       this.line(d as any);
@@ -127,9 +124,7 @@ export class NgxRealtimeChartComponent implements OnInit, OnDestroy {
       this.context.lineJoin = 'round';
       this.context.stroke();
       this.context.closePath();
-    });
 
-    this.data.forEach((d, i) => {
       if (this.options.lines![i].area) {
         this.context.beginPath();
         this.area.curve(curveTypeMapping[this.options.lines![i].curve!]);
@@ -152,14 +147,6 @@ export class NgxRealtimeChartComponent implements OnInit, OnDestroy {
     }
     if (count > 0) {
       data.splice(0, count);
-    }
-    const now = new Date();
-    const last = (data && data.length && data[data.length - 1]) || { date: now, value: 0 };
-    if (last.date === now || now.getTime() - last.date.getTime() > 1000) {
-      data.push({ date: now, value: last.value });
-      if (data.length - 1 > this.options.timeSlots!) {
-        data.splice(0, data.length - this.options.timeSlots!);
-      }
     }
     return data;
   }

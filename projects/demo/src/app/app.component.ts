@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
   timeSlots = 60;
   options: RealtimeChartOptions = {
     height: 200,
-    margin: { left: 40, top: 30, bottom: 30 },
+    margin: { left: 40, top: 30, bottom: 30, right: 10 },
     fps: 60,
     timeSlots: this.timeSlots,
     xGrid: {
@@ -47,9 +47,9 @@ export class AppComponent implements OnInit, OnDestroy {
   sub = new Subscription();
 
   ngOnInit(): void {
-    this.data = [[...this.dataService.generateRandomRealtimeData(120, 1, 40, 70)]];
-    this.sub = timer(0, 2000).subscribe(() => {
-      this.data[0].push({ date: new Date(), value: this.dataService.randomInt(40, 70) });
+    this.data = [[...this.dataService.generateRandomRealtimeData(120, 1, 10, 90)]];
+    this.sub = timer(0, 1000).subscribe(() => {
+      this.data[0].push({ date: new Date(), value: this.dataService.randomInt(10, 90) });
     });
   }
 

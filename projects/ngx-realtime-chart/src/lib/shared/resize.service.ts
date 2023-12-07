@@ -1,23 +1,20 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { Observable, Subject, Subscription, fromEvent, share } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
+import { DestroyRef, EventEmitter, Injectable, inject } from '@angular/core';
+import { Observable, fromEvent, share } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ResizeService implements OnDestroy {
-  private readonly resize$: Observable<Event> = fromEvent(window, 'resize');
-  private readonly resizeSub$: Subscription = this.resize$.subscribe(this.onResize);
-  private readonly resizeSubject: Subject<Window> = new Subject();
+export class ResizeService {
+  private readonly window = inject(DOCUMENT).defaultView as Window;
+  private readonly events = new EventEmitter<Window>();
 
   get onResize$(): Observable<Window> {
-    return this.resizeSubject.asObservable().pipe(share());
+    return this.events.asObservable().pipe(share());
   }
 
-  ngOnDestroy(): void {
-    this.resizeSub$.unsubscribe();
-  }
-
-  private onResize(event: Event) {
-    this.resizeSubject.next(event.target as Window);
+  constructor() {
+    const sub = fromEvent(this.window, 'resize').subscribe(event => this.events.emit(event.target as Window));
+    inject(DestroyRef).onDestroy(() => sub.unsubscribe());
   }
 }
