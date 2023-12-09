@@ -1,0 +1,98 @@
+@import 'colours'
+@import 'variables'
+@import 'mixins'
+
+\:host
+  display: block
+  width: 100%
+
+.selectbox-container
+  display: flex
+  align-items: center
+  width: 100%
+  max-width: 100%
+  height: $input-height
+  position: relative
+  cursor: pointer
+  font-size: 0.825rem
+  +unselectable
+
+  .chevron-icon
+    position: absolute
+    top: 8px
+    right: 15px
+    color: $text-primary
+    width: 12px
+    height: 12px
+
+  .selectbox-value
+    width: 100%
+    height: $input-height
+    font-size: 0.825rem
+    border: 1px solid $border-default
+    color: $text-primary
+    display: flex
+    align-items: center
+    padding: 0 20px 0 10px
+    position: relative
+    font-weight: $weight-normal
+    border-radius: 4px
+
+    i
+      position: absolute
+      top: 13px
+      right: 12px
+      color: $text-primary
+
+      &.custom-icon
+        top: 10px
+        left: 10px
+
+    .text-placeholder
+      color: $text-secondary
+      opacity: .6
+      font-size: 0.825rem
+
+  .selectbox-options-container
+    position: absolute
+    display: inline-block
+    top: 35px
+    width: 100%
+    min-height: $input-height
+    left: 0
+    right: 0
+    z-index: 9
+    border-bottom-left-radius: $border-radius
+    border-bottom-right-radius: $border-radius
+
+  .selectbox-options
+    width: 100%
+    background: $background
+    border: 1px solid $border-default
+    min-height: $input-height
+
+    .selectbox-option
+      display: flex
+      width: 100%
+      height: $input-height
+      align-items: center
+      padding: 0 10px
+      position: relative
+      border-bottom-left-radius: $border-radius
+      border-bottom-right-radius: $border-radius
+
+      &:last-child
+        border-bottom-left-radius: $border-radius
+        border-bottom-right-radius: $border-radius
+
+      .check-icon
+        position: absolute
+        color: $green
+        width: 15px
+        height: 15px
+        top: 12px
+        right: 10px
+
+      &:hover, &.is-active
+        background: $background-light
+        color: $text-primary

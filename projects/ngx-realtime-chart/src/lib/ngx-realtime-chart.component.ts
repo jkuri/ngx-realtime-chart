@@ -1,4 +1,14 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  SimpleChanges,
+  inject
+} from '@angular/core';
 import { max, min } from 'd3-array';
 import { Axis, axisBottom, axisLeft } from 'd3-axis';
 import { ScaleLinear, ScaleTime, scaleLinear, scaleTime } from 'd3-scale';
@@ -34,7 +44,7 @@ import { ResizeService } from './shared/resize.service';
     }
   `
 })
-export class NgxRealtimeChartComponent implements OnInit, OnDestroy {
+export class NgxRealtimeChartComponent implements OnInit, OnDestroy, OnChanges {
   private readonly elementRef = inject(ElementRef);
   private readonly resizeService = inject(ResizeService);
   private readonly renderer = inject(Renderer2);
@@ -69,6 +79,16 @@ export class NgxRealtimeChartComponent implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!this.svg) {
+      return;
+    }
+
+    if ('options' in changes) {
+      this.redrawChart();
+    }
+  }
+
   private initChart(): void {
     this.el = this.elementRef.nativeElement.querySelector('.realtime-chart-container');
     this.svg = select(this.el).append('svg');
@@ -97,6 +117,7 @@ export class NgxRealtimeChartComponent implements OnInit, OnDestroy {
       .context(this.context);
 
     this.drawAxes();
+    this.drawChart();
 
     this.interval = setInterval(() => this.drawChart(), 1000 / this.options.fps!);
   }

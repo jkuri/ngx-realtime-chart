@@ -2,46 +2,57 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { NgxRealtimeChartModule, RealtimeChartData, RealtimeChartOptions } from 'ngx-realtime-chart';
 import { Subscription, timer } from 'rxjs';
-import { DataService } from './shared/data.service';
+import { ConfigEditorComponent } from './components/config-editor/config-editor.component';
+import { DataService } from './shared/providers/data.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, NgxRealtimeChartModule],
+  imports: [CommonModule, NgxRealtimeChartModule, ConfigEditorComponent],
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit, OnDestroy {
   private readonly dataService = inject(DataService);
 
-  color = '#3C495A';
+  color = '#09090B';
   timeSlots = 60;
   options: RealtimeChartOptions = {
     height: 200,
-    margin: { left: 40, top: 30, bottom: 30, right: 10 },
-    fps: 60,
+    margin: { left: 40, top: 20, bottom: 30, right: 10 },
+    fps: 30,
     timeSlots: this.timeSlots,
     xGrid: {
       tickPadding: 15,
       tickNumber: 10,
       tickFontSize: 10,
       tickFontWeight: 'normal',
-      tickFontColor: '#3C495A',
-      color: '#E6E6E6',
-      opacity: 0.5
+      tickFontColor: this.color,
+      color: this.color,
+      opacity: 0.05
     },
     yGrid: {
       min: 0,
       max: 100,
-      color: '#E6E6E6',
-      opacity: 0.5,
+      color: this.color,
+      opacity: 0.05,
       tickNumber: 4,
       tickFormat: (v: string | number) => `${v}%`,
       tickPadding: 20,
       tickFontWeight: 'normal',
-      tickFontColor: '#3C495A',
+      tickFontColor: this.color,
       tickFontSize: 10
     },
-    lines: [{ color: this.color, opacity: 1, area: true, areaColor: this.color, areaOpacity: 0.03, curve: 'basis' }]
+    lines: [
+      {
+        color: this.color,
+        lineWidth: 2,
+        opacity: 1,
+        area: true,
+        areaColor: this.color,
+        areaOpacity: 0.02,
+        curve: 'basis'
+      }
+    ]
   };
   data: RealtimeChartData[][] = [[]];
   sub = new Subscription();
@@ -55,5 +66,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+
+  onOptionsUpdated(options: RealtimeChartOptions): void {
+    this.options = { ...options };
   }
 }

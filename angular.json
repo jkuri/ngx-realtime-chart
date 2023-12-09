@@ -49,7 +49,10 @@
             "polyfills": ["zone.js"],
             "tsConfig": "projects/demo/tsconfig.app.json",
             "assets": ["projects/demo/src/favicon.ico", "projects/demo/src/assets"],
-            "styles": ["projects/demo/src/styles.css"],
+            "styles": ["projects/demo/src/styles/app.sass"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["projects/demo/src/styles"]
+            },
             "scripts": []
           },
           "configurations": {
