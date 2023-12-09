@@ -1,9 +1,9 @@
-<div class="z-10 flex w-full gap-2">
-  <div class="basis-12 space-y-1">
+<div class="z-10 flex w-full justify-center gap-2">
+  <div class="basis-20 space-y-1">
     <label class="block text-sm">FPS</label>
     <app-selectbox [values]="fpsOptions" [(ngModel)]="options.fps" (ngModelChange)="onUpdated()" />
   </div>
-  <div class="basis-20 space-y-1">
+  <div class="basis-32 space-y-1">
     <label class="block text-sm">Time Slots</label>
     <app-selectbox [values]="timeSlotsOptions" [(ngModel)]="options.timeSlots" (ngModelChange)="onUpdated()" />
   </div>
@@ -15,7 +15,7 @@
     <label class="block text-sm">Color</label>
     <app-selectbox [values]="colorOptions" [(ngModel)]="color" (ngModelChange)="onColorUpdated()" />
   </div>
-  <div class="basis-24 space-y-1">
+  <div class="basis-28 space-y-1">
     <label class="block text-sm">Area Opacity</label>
     <app-selectbox [values]="opacityOptions" [(ngModel)]="areaOpacity" (ngModelChange)="onAreaOpacityUpdated()" />
   </div>

@@ -1,8 +1,19 @@
-<div class="flex h-full w-full flex-col items-center justify-center">
-  <div class="relative mx-auto my-4 block rounded-md border p-4 drop-shadow-sm sm:w-[360px] md:w-[800px] lg:w-[1000px]">
+<header>
+  <nav class="border-b border-gray-200 bg-white px-4 py-2.5 lg:px-6">
+    <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between lg:w-[1000px]">
+      <span class="self-center whitespace-nowrap font-medium">Angular Realtime Chart</span>
+      <a href="https://github.com/jkuri/ngx-realtime-chart" target="_blank" class="flex items-center">
+        <ng-icon name="radixGithubLogo" size="20" />
+      </a>
+    </div>
+  </nav>
+</header>
+
+<div class="mt-6 flex h-full w-full flex-col items-center justify-center">
+  <div class="relative mx-auto my-4 block rounded-md border p-4 sm:w-[360px] md:w-[800px] lg:w-[1000px]">
     <app-config-editor [options]="options" (optionsUpdated)="onOptionsUpdated($event)" />
   </div>
-  <div class="-z-10 mx-auto my-4 block rounded-md border p-4 drop-shadow-sm sm:w-[360px] md:w-[800px] lg:w-[1000px]">
+  <div class="-z-10 mx-auto my-4 block rounded-md border p-4 sm:w-[360px] md:w-[800px] lg:w-[1000px]">
     <ngx-realtime-chart [options]="options" [data]="data" />
   </div>
 </div>

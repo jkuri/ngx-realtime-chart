@@ -33,20 +33,11 @@
     color: $text-primary
     display: flex
     align-items: center
-    padding: 0 20px 0 10px
+    justify-content: space-between
+    padding: 0 10px
     position: relative
     font-weight: $weight-normal
-    border-radius: 4px
-
-    i
-      position: absolute
-      top: 13px
-      right: 12px
-      color: $text-primary
-
-      &.custom-icon
-        top: 10px
-        left: 10px
+    border-radius: $border-radius
 
     .text-placeholder
       color: $text-secondary
@@ -76,6 +67,7 @@
       width: 100%
       height: $input-height
       align-items: center
+      justify-content: space-between
       padding: 0 10px
       position: relative
       border-bottom-left-radius: $border-radius
@@ -84,14 +76,6 @@
       &:last-child
         border-bottom-left-radius: $border-radius
         border-bottom-right-radius: $border-radius
-
-      .check-icon
-        position: absolute
-        color: $green
-        width: 15px
-        height: 15px
-        top: 12px
-        right: 10px
 
       &:hover, &.is-active
         background: $background-light

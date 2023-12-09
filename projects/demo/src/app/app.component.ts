@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { radixGithubLogo } from '@ng-icons/radix-icons';
 import { NgxRealtimeChartModule, RealtimeChartData, RealtimeChartOptions } from 'ngx-realtime-chart';
 import { Subscription, timer } from 'rxjs';
 import { ConfigEditorComponent } from './components/config-editor/config-editor.component';
@@ -8,8 +10,9 @@ import { DataService } from './shared/providers/data.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, NgxRealtimeChartModule, ConfigEditorComponent],
-  templateUrl: './app.component.html'
+  imports: [CommonModule, NgxRealtimeChartModule, ConfigEditorComponent, NgIconComponent],
+  templateUrl: './app.component.html',
+  providers: [provideIcons({ radixGithubLogo })]
 })
 export class AppComponent implements OnInit, OnDestroy {
   private readonly dataService = inject(DataService);

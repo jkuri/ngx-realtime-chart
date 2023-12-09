@@ -1,14 +1,19 @@
 import { NgForOf, NgIf } from '@angular/common';
 import { Component, ElementRef, HostListener, Input, OnInit, forwardRef } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { radixCheck, radixChevronDown } from '@ng-icons/radix-icons';
 
 @Component({
   selector: 'app-selectbox',
   templateUrl: './selectbox.component.html',
   styleUrl: './selectbox.component.sass',
   standalone: true,
-  imports: [NgForOf, NgIf, FormsModule],
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => SelectboxComponent), multi: true }]
+  imports: [NgForOf, NgIf, FormsModule, NgIconComponent],
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => SelectboxComponent), multi: true },
+    provideIcons({ radixChevronDown, radixCheck })
+  ]
 })
 export class SelectboxComponent implements ControlValueAccessor, OnInit {
   @Input() values!: { value: number | string | boolean; placeholder: string }[];

@@ -2,7 +2,7 @@
   <span class="selectbox-value">
     <i [class]="customIcon" *ngIf="customIcon"></i>
     <span [class.text-placeholder]="placeholder === placeholderText">{{ placeholderText }}</span>
-    <i class="fas fa-chevron-down"></i>
+    <ng-icon name="radixChevronDown" />
   </span>
   <div class="selectbox-options-container" *ngIf="isOpened">
     <div class="selectbox-options">
@@ -13,7 +13,7 @@
         [class.is-active]="values[i].value === innerValue"
       >
         <span>{{ val.placeholder }}</span>
-        <i class="fas fa-check check-icon" *ngIf="values[i].value === innerValue"></i>
+        <ng-icon name="radixCheck" *ngIf="values[i].value === innerValue" />
       </div>
     </div>
   </div>
