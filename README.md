@@ -4,6 +4,8 @@ _ngx-realtime-chart_ is a small library designed for live streaming data in Angu
 
 ---
 
+See StackBlitz [demo](https://ngx-realtime-chart.stackblitz.io)
+
 ## Installation
 
 ```sh
