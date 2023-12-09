@@ -1,14 +1,25 @@
 {
   "name": "ngx-realtime-chart",
-  "version": "0.1.0",
+  "version": "0.2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jkuri/ngx-realtime-chart.git"
+  },
+  "authors": [
+    "Jan Kuri <jkuri88@gmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jkuri/ngx-realtime-chart/issues"
+  },
   "peerDependencies": {
     "@angular/common": ">= 17.0.0",
-    "@angular/core": ">= 17.0.0",
-    "d3": "^7.8.5",
-    "date-fns": "^2.30.0"
+    "@angular/core": ">= 17.0.0"
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "d3": "^7.8.5",
+    "date-fns": "^2.30.0"
   },
   "sideEffects": false
 }

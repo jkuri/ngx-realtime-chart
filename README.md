@@ -23,7 +23,7 @@ import { NgxRealtimeChartModule } from 'ngx-realtime-chart';
 export class AppModule {}
 ```
 
-Example with stanadlone component and simple configuration:
+Example with standalone component and simple configuration:
 
 ```ts
 import { NgxRealtimeChartComponent, RealtimeChartData, RealtimeChartOptions } from 'ngx-realtime-chart';
