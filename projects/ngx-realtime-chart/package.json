@@ -1,6 +1,7 @@
 {
   "name": "ngx-realtime-chart",
-  "version": "0.2.1",
+  "version": "0.2.2",
+  "homepage": "https://ngx-realtime-chart.vercel.app",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jkuri/ngx-realtime-chart.git"
