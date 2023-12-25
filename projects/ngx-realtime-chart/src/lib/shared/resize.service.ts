@@ -8,12 +8,14 @@ import { Observable, fromEvent, share } from 'rxjs';
 export class ResizeService {
   private readonly window = inject(DOCUMENT).defaultView as Window;
   private readonly events = new EventEmitter<Window>();
+  private readonly resize: Observable<Window>;
 
   get onResize$(): Observable<Window> {
-    return this.events.asObservable().pipe(share());
+    return this.resize;
   }
 
   constructor() {
+    this.resize = this.events.asObservable().pipe(share());
     const sub = fromEvent(this.window, 'resize').subscribe(event => this.events.emit(event.target as Window));
     inject(DestroyRef).onDestroy(() => sub.unsubscribe());
   }

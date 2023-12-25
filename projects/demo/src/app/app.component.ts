@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { radixGithubLogo } from '@ng-icons/radix-icons';
 import { NgxRealtimeChartModule, RealtimeChartData, RealtimeChartOptions } from 'ngx-realtime-chart';
-import { Subscription, timer } from 'rxjs';
+import { Subscription, concatMap, delay, of, timer } from 'rxjs';
 import { ConfigEditorComponent } from './components/config-editor/config-editor.component';
 import { DataService } from './shared/providers/data.service';
 
@@ -62,9 +62,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.data = [[...this.dataService.generateRandomRealtimeData(120, 1, 10, 90)]];
-    this.sub = timer(0, 1000).subscribe(() => {
-      this.data[0].push({ date: new Date(), value: this.dataService.randomInt(10, 90) });
-    });
+    this.sub = timer(0, 1000)
+      .pipe(concatMap(i => of(i).pipe(delay(this.dataService.randomInt(1000, 5000)))))
+      .subscribe(() => {
+        this.data[0].push({ date: new Date(), value: this.dataService.randomInt(10, 90) });
+      });
   }
 
   ngOnDestroy(): void {

@@ -160,15 +160,22 @@ export class NgxRealtimeChartComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   private updateData(data: RealtimeChartData[]): RealtimeChartData[] {
-    const validTime = subSeconds(new Date(), this.options.timeSlots!);
+    const now = new Date();
+    const validTime = subSeconds(now, this.options.timeSlots!);
     data = data.filter(Boolean).sort((a, b) => (a.date > b.date ? 1 : -1));
     let count = 0;
-    while (data.length - count >= this.options.timeSlots! && data[count + 1].date < validTime) {
+    while (data.length - count + 1 >= this.options.timeSlots! && data[count + 1].date < validTime) {
       count++;
     }
     if (count > 0) {
       data.splice(0, count);
     }
+
+    const last = (data && data.length && data[data.length - 1]) || { date: now, value: 0 };
+    if (last.date === now || data.length < this.options.timeSlots!) {
+      data.push({ date: now, value: last.value });
+    }
+
     return data;
   }
 
